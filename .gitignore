@@ -1,1 +1,5 @@
 volumes
+app/files/ldap.debug.txt
+app/includes/config/settings.php
+app/includes/config/tp.config.php
+app/includes/libraries/csrfp/libs/csrfp.config.php

@@ -18,6 +18,7 @@ services:
         volumes:
             - ./config/php/docker-vars.ini:/usr/local/etc/php/conf.d/docker-vars.ini
             - ./app:/app
+            - ./volumes/teampass/sk/:/usr/local/teampass/sk/
         networks:
             - frontend
             - backend

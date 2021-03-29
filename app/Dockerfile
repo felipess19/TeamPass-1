@@ -1,4 +1,5 @@
 FROM php:7.4-fpm-alpine
+LABEL author="felipess19@protonmail.com"
  
 RUN apk update --no-cache \
 && apk add \
@@ -29,6 +30,8 @@ RUN docker-php-ext-install iconv
 RUN apk add jpeg-dev zlib-dev libpng-dev freetype-dev libjpeg-turbo-dev
 RUN docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ 
 RUN docker-php-ext-install gd
+
+RUN docker-php-ext-install mysqli
 
 RUN apk del openldap-dev
  
