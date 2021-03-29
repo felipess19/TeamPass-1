@@ -1,0 +1,41 @@
+version: "3.2"
+services:
+    nginx:
+        container_name: nginx
+        image: nginx:1.17.8
+        ports:
+            - 8080:80
+        volumes:
+            - ./config/nginx/site.conf:/etc/nginx/conf.d/site.conf
+            - ./app:/app
+        links:
+            - app
+        networks:
+            - frontend
+    app:
+        build: app
+        container_name: app
+        volumes:
+            - ./config/php/docker-vars.ini:/usr/local/etc/php/conf.d/docker-vars.ini
+            - ./app:/app
+        networks:
+            - frontend
+            - backend
+    db:
+        container_name: db
+        restart: always
+        image: mysql/mysql-server:5.7
+        command: --socket=/var/run/mysqld/mysql.sock
+        environment:
+            MYSQL_ROOT_PASSWORD: mypass
+            MYSQL_DATABASE: teampass
+            MYSQL_PASSWORD: teampass
+            MYSQL_USER: teampass
+        volumes:
+            - ./volumes/db:/var/lib/mysql
+        networks:
+            - backend
+
+networks:
+    frontend:
+    backend:
